@@ -1,11 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from '../../logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      
+      
+      
+       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -18,9 +21,58 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
+       
+
+      <MyOwnComponent />
     </div>
+    
+  );
+};
+
+
+
+export default App;
+
+
+function Header(){
+  return (
+
+    <header>Header</header>
+
+  );
+};
+
+function Main(){
+  return (
+
+    <main>Main</main>
+
+  );
+};
+
+function TodoListItem(){
+
+  
+
+}
+
+function TodoList(){
+  
+  return (
+
+    <>
+
+    </>
+
+
   );
 }
 
-export default App;
+function Footer(){
+  return (
+
+    <footer>Footer</footer>
+
+  );
+};
