@@ -1,60 +1,16 @@
-import React from 'react';
-import logo from '../../logo.svg';
-import './App.css';
+import React from "react";
+import logo from "../../logo.svg";
+import "./App.css";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function App() {
   return (
     <div className="App">
-       <Header />
-       <Main />
-       <Footer />
-</div>
-   );
-};
-
-
+      <Header />
+      
+    </div>
+  );
+}
 
 export default App;
-
-
-function Header(){
-  return (
-
-    <header>Header</header>
-
-  );
-};
-
-function Main(){
-  return (
-
-    <main>Main</main>
-
-  );
-};
-
-function TodoListItem(){
-
-  
-
-}
-
-function TodoList(){
-  
-  return (
-
-    <>
-
-    </>
-
-
-  );
-}
-
-function Footer(){
-  return (
-
-    <footer>Footer</footer>
-
-  );
-};
