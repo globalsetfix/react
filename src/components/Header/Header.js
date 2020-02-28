@@ -2,9 +2,16 @@ import React from "react";
 import ButtonAppBar from "./ButtonAppBar/ButtonAppBar";
 
 function Header() {
+  
+  const dataPage = {
+      
+    title : 'Your Best Travels'
+
+  }  
+
   return (
     <header>
-      <ButtonAppBar />
+      <ButtonAppBar projectName={dataPage.title} />
     </header>
   );
 }

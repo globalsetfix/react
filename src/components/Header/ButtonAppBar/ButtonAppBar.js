@@ -17,11 +17,11 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -30,7 +30,7 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            React Project
+            {props.projectName}
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
