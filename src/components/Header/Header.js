@@ -5,7 +5,7 @@ function Header() {
   
   const dataPage = {
       
-    title : 'Your Best Travels'
+    title : 'GoTravel'
 
   }  
 
