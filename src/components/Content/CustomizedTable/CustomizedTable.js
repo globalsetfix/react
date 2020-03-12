@@ -44,9 +44,6 @@ const rows = [
 ];
 */
 
-
-
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700
@@ -62,26 +59,38 @@ export default function CustomizedTable(props) {
   
   // Значение по умолчанию для модального окна 
   const defDataAlert = {
-       isOpen : false
+       isOpen : false,
+       title : "Ops! Task is empty",
+       description : "Error deleting task",
+       canselBtn : "Cansel",
+       deleteBtn : "Delete",
+       id : null
   }
   
   // Передаем это значение
   const [dataAlert, setDataAlert] = React.useState(defDataAlert);
   
-  // По клику на кнопку устанавливаем новое значение
-  const handleClickOpen =  React.useCallback((ev) => {
+  // По клику на иконку delete передаем в модальное окно новую задачу
+  const delAlertOpen = (rowId,rowTitle) => {
     const objDataAlert = {
-          isOpen : true
+      isOpen : true,
+      title : "Are you sure you want to delete this task?",
+      description : rowTitle,
+      canselBtn : "Cansel",
+      deleteBtn : "Delete",
+      id : rowId
     }   
-    setDataAlert(objDataAlert);
-  }, []);
+    setDataAlert(objDataAlert);  
+  }
+
+
+  const handleDelete = (id) => {
+        console.log(id);
+  }
+
   
-  // Здесь показывает что значение установилось c false на true
-  console.log(dataAlert);
   return (
     <TableContainer component={Paper}>
-      
-      {/* Передаем значение , как передать новое установленное значение , ведь компонент уже отрисовался ? */}
       <AlertDialog dataAlert={dataAlert} />
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
@@ -97,8 +106,8 @@ export default function CustomizedTable(props) {
                {row.title} 
               </StyledTableCell>
               <StyledTableCell align="right">
-               { /* <EditIcon className={classes.iconStyle} /> */ }
-                <DeleteForeverIcon onClick={handleClickOpen} className={classes.iconStyle} />
+                <EditIcon />
+                <DeleteForeverIcon onClick={()=>delAlertOpen(row.id,row.title)} className={classes.iconStyle} />
               </StyledTableCell>
             </StyledTableRow>
           ))}

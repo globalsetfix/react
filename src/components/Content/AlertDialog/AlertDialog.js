@@ -8,13 +8,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function AlertDialog(props) {
   const { dataAlert } = props;
-  const [open, setOpen] = React.useState(dataAlert.isOpen);
+  const [open, setOpen] = React.useState(false);
+  
+  // Победил использованием эфекта + передача в массив зависимостей объекта dataAlert
+  React.useEffect(() => {
+        setOpen(dataAlert.isOpen);
+  },[dataAlert]);
   
   const handleClose = () => {
         setOpen(false);
   };
- 
-  return (
+
+  return ( 
     <div>
       <Dialog
         open={open}
@@ -22,18 +27,18 @@ export default function AlertDialog(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{ /*{dataAlert.title} */} </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{dataAlert.title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          { /*{dataAlert.description} */} 
+           {dataAlert.id}. {dataAlert.description}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-          { /*{dataAlert.canselTxt} */} 
+           {dataAlert.canselBtn}
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-         { /*  {dataAlert.deleteTxt} */} 
+          <Button onClick={props.handleDelete(dataAlert.id)} color="primary" autoFocus>
+           {dataAlert.deleteBtn}
           </Button>
         </DialogActions>
       </Dialog>
