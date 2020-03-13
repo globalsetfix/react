@@ -5,19 +5,18 @@ import CustomizedTable from "./CustomizedTable/CustomizedTable";
 import Api from "../../servises/api";
 
 function Content() {
-  
   const dataTitle = {
-    name: "Task names",
+    name: "Task names"
   };
-  
+
   const titlePage = {
     title: "TODO List is empty"
   };
 
-  const [ dataTable, setDataTable ] = useState([]);
+  const [dataTable, setDataTable] = useState([]);
   let customTable;
-  
-  // Получение данных 
+
+  // Получение данных
   useEffect(() => {
     const url = "http://localhost:3004/posts";
     axios(url)
@@ -28,21 +27,30 @@ function Content() {
   }, []);
 
   // Удаление записи
-  const handleDelete = React.useCallback((id) => {
-    Api.deleteJsonRecord(id)
-      .then(() => Api.getRequest())
-      .then((res) => {
-        setDataTable(res.data);
-      });
-  }, [id]);
+  const handleDelete = React.useCallback(
+    id => {
+      Api.deleteJsonRecord(id)
+        .then(() => Api.getRequest())
+        .then(res => {
+          setDataTable(res.data);
+        });
+    },
+    [id]
+  );
 
   // Добавление записи
 
   // Редактирование записи
 
-  if(dataTable.length) {
-     titlePage.title = "TODO List";
-     customTable = <CustomizedTable data={dataTable} title={dataTitle} deletejson={handleDelete} />;
+  if (dataTable.length) {
+    titlePage.title = "TODO List";
+    customTable = (
+      <CustomizedTable
+        data={dataTable}
+        title={dataTitle}
+        deletejson={handleDelete}
+      />
+    );
   }
 
   return (

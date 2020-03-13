@@ -7,10 +7,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AlertDialog from "../AlertDialog/AlertDialog";
-
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -34,41 +33,41 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700
   },
-  iconStyle : {
-    cursor : 'pointer'
+  iconStyle: {
+    cursor: "pointer"
   }
 });
 
 export default function CustomizedTable(props) {
   const classes = useStyles();
   const { data, title, deletejson } = props;
-  
-  // Значение по умолчанию для модального окна 
+
+  // Значение по умолчанию для модального окна
   const defDataAlert = {
-       // состояние мод окна
-       isOpen : false,
-       title : "Ops! Task is empty",
-       description : "Error deleting task",
-       canselBtn : "Cansel",
-       deleteBtn : "Delete",
-       id : null
-  }
-  
-  // Объект dataAlert данных для мод окна 
-  const [ dataAlert, setDataAlert ] = React.useState(defDataAlert);
-  
+    // состояние мод окна
+    isOpen: false,
+    title: "Ops! Task is empty",
+    description: "Error deleting task",
+    canselBtn: "Cansel",
+    deleteBtn: "Delete",
+    id: null
+  };
+
+  // Объект dataAlert данных для мод окна
+  const [dataAlert, setDataAlert] = React.useState(defDataAlert);
+
   // По клику на иконку delete передаем в модальное окно задачу
-  const delAlertOpen = (rowId,rowTitle) => {
+  const delAlertOpen = (rowId, rowTitle) => {
     const objDataAlert = {
-      isOpen : true,
-      title : "Are you sure you want to delete this task?",
-      description : rowTitle,
-      canselBtn : "Cansel",
-      deleteBtn : "Delete",
-      id : rowId
-    }   
-    setDataAlert(objDataAlert);  
-  }
+      isOpen: true,
+      title: "Are you sure you want to delete this task?",
+      description: rowTitle,
+      canselBtn: "Cansel",
+      deleteBtn: "Delete",
+      id: rowId
+    };
+    setDataAlert(objDataAlert);
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -76,7 +75,9 @@ export default function CustomizedTable(props) {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>{title.name} ({data.length})</StyledTableCell>
+            <StyledTableCell>
+              {title.name} ({data.length})
+            </StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -84,11 +85,14 @@ export default function CustomizedTable(props) {
           {data.map(row => (
             <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
-               {row.title} 
+                {row.title}
               </StyledTableCell>
               <StyledTableCell align="right">
                 <EditIcon />
-                <DeleteForeverIcon onClick={()=>delAlertOpen(row.id,row.title)} className={classes.iconStyle} />
+                <DeleteForeverIcon
+                  onClick={() => delAlertOpen(row.id, row.title)}
+                  className={classes.iconStyle}
+                />
               </StyledTableCell>
             </StyledTableRow>
           ))}
