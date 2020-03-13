@@ -7,14 +7,20 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function AlertDialog(props) {
-  const { dataAlert } = props;
-  const [open, setOpen] = React.useState(false);
   
-  // Победил использованием эфекта + передача в массив зависимостей объекта dataAlert
+  // dataAlert - объект данных для мод окна
+  // handleDelete - функция удаления записи
+  const { dataAlert, handleDelete } = props;
+  
+  // open - принимает true или false для открытия или закрытия мод окна
+  const [ open, setOpen ] = React.useState(false);
+
+  // dataAlert.isOpen - переменная содержащая true или false
   React.useEffect(() => {
         setOpen(dataAlert.isOpen);
   },[dataAlert]);
-  
+
+  // Закрываем мод окно
   const handleClose = () => {
         setOpen(false);
   };
@@ -37,7 +43,7 @@ export default function AlertDialog(props) {
           <Button onClick={handleClose} color="primary">
            {dataAlert.canselBtn}
           </Button>
-          <Button onClick={props.handleDelete(dataAlert.id)} color="primary" autoFocus>
+          <Button onClick={() => handleDelete(dataAlert.id)} color="primary" autoFocus>
            {dataAlert.deleteBtn}
           </Button>
         </DialogActions>

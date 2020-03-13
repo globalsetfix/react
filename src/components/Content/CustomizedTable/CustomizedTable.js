@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import AlertDialog from "../AlertDialog/AlertDialog";
 
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -29,21 +30,6 @@ const StyledTableRow = withStyles(theme => ({
   }
 }))(TableRow);
 
-/*
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-
-const rows = [
-  createData('Frozen yoghurt', 159),
-  createData('Ice cream sandwich', 237),
-  createData('Eclair', 262),
-  createData('Cupcake', 305),
-  createData('Gingerbread', 356),
-];
-*/
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700
@@ -55,10 +41,11 @@ const useStyles = makeStyles({
 
 export default function CustomizedTable(props) {
   const classes = useStyles();
-  const { data, title } = props;
+  const { data, title, deletejson } = props;
   
   // Значение по умолчанию для модального окна 
   const defDataAlert = {
+       // состояние мод окна
        isOpen : false,
        title : "Ops! Task is empty",
        description : "Error deleting task",
@@ -67,10 +54,10 @@ export default function CustomizedTable(props) {
        id : null
   }
   
-  // Передаем это значение
-  const [dataAlert, setDataAlert] = React.useState(defDataAlert);
+  // Объект dataAlert данных для мод окна 
+  const [ dataAlert, setDataAlert ] = React.useState(defDataAlert);
   
-  // По клику на иконку delete передаем в модальное окно новую задачу
+  // По клику на иконку delete передаем в модальное окно задачу
   const delAlertOpen = (rowId,rowTitle) => {
     const objDataAlert = {
       isOpen : true,
@@ -83,15 +70,9 @@ export default function CustomizedTable(props) {
     setDataAlert(objDataAlert);  
   }
 
-
-  const handleDelete = (id) => {
-        console.log(id);
-  }
-
-  
   return (
     <TableContainer component={Paper}>
-      <AlertDialog dataAlert={dataAlert} />
+      <AlertDialog dataAlert={dataAlert} handleDelete={deletejson} />
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
